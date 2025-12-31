@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-Hussein Ismail | Full Stack Developer</title>
+    <meta name="description"
+        content="AL-Hussein Ismail MohammedAL-Mahdy - Full Stack Developer specializing in Frontend, Backend, WordPress, and AI solutions">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES & RESET
+           ============================================ */
+        :root {
+            --primary-green: #00ff00;
+            --dark-green: #00cc00;
+            --bg-dark: #0a0a0a;
+            --bg-card: #0d0d0d;
+            --border-green: #00ff0066;
+            --text-dim: #00ff0099;
+            --glow-green: 0 0 10px #00ff0055, 0 0 20px #00ff0033;
+            --glow-strong: 0 0 10px #00ff00, 0 0 20px #00ff0077, 0 0 30px #00ff0055;
+            --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background-color: var(--bg-dark);
+            color: var(--primary-green);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        ::selection {
+            background: var(--primary-green);
+            color: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 4px;
+        }
+
+        /* ============================================
+           HEADER / NAVIGATION
+           ============================================ */
+        .terminal-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 2px solid var(--border-green);
+            padding: 20px 30px;
+            background: var(--bg-card);
+            box-shadow: var(--glow-green);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-shadow: var(--glow-strong);
+            margin-bottom: 15px;
+        }
+
+        .header-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-green), transparent);
+            margin-bottom: 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--border-green);
+            color: var(--primary-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--primary-green);
+            color: var(--bg-dark);
+            box-shadow: var(--glow-strong);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           TERMINAL BOX
+           ============================================ */
+        .terminal-box {
+            border: 2px solid var(--border-green);
+            background: var(--bg-card);
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--glow-green);
+            transition: all 0.3s ease;
+        }
+
+        .terminal-box:hover {
+            border-color: var(--primary-green);
+            box-shadow: var(--glow-strong);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: normal;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: var(--glow-green);
+        }
+
+        .section-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-green), var(--border-green), transparent);
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           HOME PAGE
+           ============================================ */
+        .info-line {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .highlight {
+            color: var(--primary-green);
+            text-shadow: var(--glow-green);
+        }
+
+        .cursor {
+            animation: cursorBlink 0.8s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .status-available {
+            color: var(--primary-green);
+            font-weight: bold;
+            text-shadow: var(--glow-strong);
+        }
+
+        .about-text {
+            line-height: 1.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-category {
+            padding: 15px 0;
+        }
+
+        .skill-title {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--primary-green);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            padding: 5px 10px;
+            border: 1px solid var(--border-green);
+            background: rgba(0, 255, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 0, 0.15);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .guide-line {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+
+        /* ============================================
+           PROJECTS PAGE
+           ============================================ */
+        .project-card {
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateX(10px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .github-btn,
+        .demo-btn {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            background: transparent;
+            border: 2px solid var(--border-green);
+            color: var(--primary-green);
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .github-btn:hover,
+        .demo-btn:hover {
+            background: var(--primary-green);
+            color: var(--bg-dark);
+            box-shadow: var(--glow-green);
+        }
+
+        .project-content {
+            padding-left: 15px;
+            border-left: 3px solid var(--border-green);
+        }
+
+        .project-desc,
+        .project-tech,
+        .project-status {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .tech-list {
+            color: var(--text-dim);
+        }
+
+        .status-featured {
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc0055;
+        }
+
+        .status-completed {
+            color: var(--primary-green);
+            text-shadow: var(--glow-green);
+        }
+
+        .status-progress {
+            color: #00ccff;
+            text-shadow: 0 0 10px #00ccff55;
+        }
+
+        /* ============================================
+           EXPERIENCE PAGE
+           ============================================ */
+        .experience-card {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .exp-marker {
+            position: absolute;
+            left: 20px;
+            top: 25px;
+            bottom: 25px;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary-green), var(--border-green));
+        }
+
+        .exp-title {
+            font-size: 1.15rem;
+            font-weight: normal;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .exp-company,
+        .exp-period {
+            margin-bottom: 10px;
+            color: var(--text-dim);
+        }
+
+        .exp-skills {
+            margin: 15px 0;
+        }
+
+        .skill-label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .exp-desc {
+            line-height: 1.7;
+            color: var(--text-dim);
+            margin-top: 15px;
+        }
+
+        .education-item {
+            padding: 15px 0;
+        }
+
+        .edu-title {
+            font-size: 1.1rem;
+            font-weight: normal;
+            margin-bottom: 12px;
+        }
+
+        .edu-info {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+
+        /* ============================================
+           CONTACT PAGE
+           ============================================ */
+        .contact-intro {
+            line-height: 1.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-title,
+        .info-title {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            background: var(--bg-dark);
+            border: 2px solid var(--border-green);
+            color: var(--primary-green);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--primary-green);
+            box-shadow: var(--glow-green);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            background: transparent;
+            border: 2px solid var(--border-green);
+            color: var(--primary-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-green);
+            color: var(--bg-dark);
+            box-shadow: var(--glow-strong);
+        }
+
+        .contact-details {
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+        }
+
+        .contact-label {
+            margin-bottom: 5px;
+            color: var(--text-dim);
+        }
+
+        .contact-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding-left: 20px;
+        }
+
+        .contact-link:hover {
+            text-shadow: var(--glow-strong);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .social-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+        }
+
+        .social-link:hover {
+            text-shadow: var(--glow-strong);
+            transform: translateX(10px);
+        }
+
+        .social-icon {
+            font-size: 1.2rem;
+        }
+
+        .availability-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px dashed var(--border-green);
+            background: rgba(0, 255, 0, 0.05);
+        }
+
+        .availability-label {
+            margin-bottom: 10px;
+            color: var(--text-dim);
+        }
+
+        .availability-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+            box-shadow: var(--glow-strong);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .terminal-footer {
+            padding: 30px 40px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid var(--border-green);
+            background: var(--bg-card);
+        }
+
+        .footer-text {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .footer-version {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+
+            .terminal-header,
+            .main-content,
+            .terminal-footer {
+                padding: 20px;
+            }
+
+            .header-content,
+            .terminal-box {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .nav-menu {
+                gap: 10px;
+            }
+
+            .nav-btn {
+                font-size: 0.85rem;
+                padding: 8px 15px;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .experience-card {
+                padding-left: 25px;
+            }
+
+            .exp-marker {
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .terminal-header,
+            .main-content,
+            .terminal-footer {
+                padding: 15px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                flex: 1 1 calc(50% - 8px);
+                text-align: center;
+                font-size: 0.8rem;
+                padding: 10px;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1rem;
+            }
+
+            .skill-tag {
+                font-size: 0.8rem;
+            }
+        }
+
+        .glitch {
+            animation: glitch 0.5s linear infinite;
+        }
+
+        @keyframes glitch {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header / Navigation -->
+    <header class="terminal-header">
+        <div class="header-content">
+            <h1 class="logo">> AL-HUSSEIN ISMAIL</h1>
+            <div class="header-line"></div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-page="home">[HOME]</button>
+                <button class="nav-btn" data-page="projects">[PROJECTS]</button>
+                <button class="nav-btn" data-page="experience">[EXPERIENCE]</button>
+                <button class="nav-btn" data-page="contact">[CONTACT]</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- HOME PAGE -->
+        <section id="home" class="page active">
+            <div class="terminal-box">
+                <h2 class="section-title">> SYSTEM.INIT</h2>
+                <div class="section-line"></div>
+                <div class="init-content">
+                    <p class="info-line">> LOADING PROFILE...</p>
+                    <p class="info-line">> NAME: <span class="highlight" id="name-type"></span><span
+                            class="cursor">█</span></p>
+                    <p class="info-line">> ROLE: <span class="highlight" id="role-type"></span><span
+                            class="cursor">█</span></p>
+                    <p class="info-line">> STATUS: <span class="status-available">AVAILABLE</span></p>
+                </div>
+            </div>
+
+            <div class="terminal-box">
+                <h2 class="section-title">> ABOUT.EXE</h2>
+                <div class="section-line"></div>
+                <p class="about-text">
+                    HELLO, I AM A PASSIONATE FULL-STACK DEVELOPER WITH EXPERTISE IN FRONTEND AND BACKEND DEVELOPMENT.
+                    I SPECIALIZE IN BUILDING MODERN WEB APPLICATIONS USING REACT, NODE.JS, AND WORDPRESS.
+                    I ALSO HAVE EXPERIENCE IN AI/ML INTEGRATION AND CREATING INTELLIGENT SOLUTIONS.
+                    I AM CURRENTLY SEEKING NEW OPPORTUNITIES TO BRING VALUE TO INNOVATIVE PROJECTS.
+                </p>
+            </div>
+
+            <div class="terminal-box">
+                <h2 class="section-title">> SKILLS.CONFIG</h2>
+                <div class="section-line"></div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3 class="skill-title">> FRONTEND:</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">"HTML5"</span>
+                            <span class="skill-tag">"CSS3"</span>
+                            <span class="skill-tag">"JavaScript"</span>
+                            <span class="skill-tag">"React"</span>
+                            <span class="skill-tag">"Vue.js"</span>
+                            <span class="skill-tag">"TypeScript"</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="skill-title">> BACKEND:</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">"Node.js"</span>
+                            <span class="skill-tag">"PHP"</span>
+                            <span class="skill-tag">"Laravel"</span>
+                            <span class="skill-tag">"Python"</span>
+                            <span class="skill-tag">"MySQL"</span>
+                            <span class="skill-tag">"MongoDB"</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="skill-title">> WORDPRESS:</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">"Theme Development"</span>
+                            <span class="skill-tag">"Plugin Development"</span>
+                            <span class="skill-tag">"WooCommerce"</span>
+                            <span class="skill-tag">"Elementor"</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3 class="skill-title">> AI/ML:</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">"TensorFlow"</span>
+                            <span class="skill-tag">"OpenAI API"</span>
+                            <span class="skill-tag">"Chatbot Development"</span>
+                            <span class="skill-tag">"Machine Learning"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="terminal-box nav-guide">
+                <p class="guide-line">> USE THE NAVIGATION MENU ABOVE TO EXPLORE</p>
+                <p class="guide-line">> [PROJECTS] - VIEW MY WORK</p>
+                <p class="guide-line">> [EXPERIENCE] - CHECK MY SKILLS</p>
+                <p class="guide-line">> [CONTACT] - GET IN TOUCH</p>
+            </div>
+        </section>
+
+        <!-- PROJECTS PAGE -->
+        <section id="projects" class="page">
+            <div class="terminal-box">
+                <h2 class="section-title">> PROJECTS.LIST<span class="cursor">█</span></h2>
+                <div class="section-line"></div>
+                <p class="info-line">> TOTAL PROJECTS: 4</p>
+            </div>
+
+            <div class="terminal-box project-card">
+                <div class="project-header">
+                    <h3 class="project-title">[01] SMARTSHOP E-COMMERCE</h3>
+                    <a href="#" class="github-btn">🔗 GITHUB</a>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">> DESCRIPTION: <span class="highlight">A complete e-commerce platform with
+                            admin dashboard, product management, shopping cart, and payment integration. Built with
+                            React frontend and Node.js backend.</span></p>
+                    <p class="project-tech">> TECHNOLOGIES: <span class="tech-list">["React", "Node.js", "MongoDB",
+                            "Express", "Stripe API"]</span></p>
+                    <p class="project-status">> STATUS: <span class="status-featured">FEATURED</span></p>
+                    <a href="#" class="demo-btn">🔗 VIEW DEMO</a>
+                </div>
+            </div>
+
+            <div class="terminal-box project-card">
+                <div class="project-header">
+                    <h3 class="project-title">[02] AI CHATBOT ASSISTANT</h3>
+                    <a href="#" class="github-btn">🔗 GITHUB</a>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">> DESCRIPTION: <span class="highlight">An intelligent chatbot powered by
+                            OpenAI GPT API that can answer questions, provide recommendations, and assist users.</span>
+                    </p>
+                    <p class="project-tech">> TECHNOLOGIES: <span class="tech-list">["Python", "OpenAI API", "Flask",
+                            "JavaScript", "WebSocket"]</span></p>
+                    <p class="project-status">> STATUS: <span class="status-completed">COMPLETED</span></p>
+                    <a href="#" class="demo-btn">🔗 VIEW DEMO</a>
+                </div>
+            </div>
+
+            <div class="terminal-box project-card">
+                <div class="project-header">
+                    <h3 class="project-title">[03] WORDPRESS BUSINESS THEME</h3>
+                    <a href="#" class="github-btn">🔗 GITHUB</a>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">> DESCRIPTION: <span class="highlight">A premium WordPress theme for
+                            businesses with WooCommerce integration, custom widgets, and Elementor compatibility.</span>
+                    </p>
+                    <p class="project-tech">> TECHNOLOGIES: <span class="tech-list">["WordPress", "PHP", "WooCommerce",
+                            "Elementor", "SCSS"]</span></p>
+                    <p class="project-status">> STATUS: <span class="status-completed">COMPLETED</span></p>
+                    <a href="#" class="demo-btn">🔗 VIEW DEMO</a>
+                </div>
+            </div>
+
+            <div class="terminal-box project-card">
+                <div class="project-header">
+                    <h3 class="project-title">[04] TASK MANAGEMENT SYSTEM</h3>
+                    <a href="#" class="github-btn">🔗 GITHUB</a>
+                </div>
+                <div class="project-content">
+                    <p class="project-desc">> DESCRIPTION: <span class="highlight">A full-featured task management
+                            application with real-time collaboration and drag-and-drop interface.</span></p>
+                    <p class="project-tech">> TECHNOLOGIES: <span class="tech-list">["Vue.js", "Laravel", "MySQL",
+                            "Socket.io", "Redis"]</span></p>
+                    <p class="project-status">> STATUS: <span class="status-progress">IN PROGRESS</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE PAGE -->
+        <section id="experience" class="page">
+            <div class="terminal-box">
+                <h2 class="section-title">> EXPERIENCE.CONFIG</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="terminal-box experience-card">
+                <div class="exp-marker"></div>
+                <h3 class="exp-title">[01] FULL STACK DEVELOPER</h3>
+                <p class="exp-company">> COMPANY: FREELANCE</p>
+                <p class="exp-period">> PERIOD: JAN 2023 - PRESENT</p>
+                <div class="exp-skills">
+                    <p class="skill-label">> SKILLS:</p>
+                    <span class="tech-list">["React", "Node.js", "WordPress", "AI Integration", "MongoDB"]</span>
+                </div>
+                <p class="exp-desc">> Built custom web applications and e-commerce solutions for various clients.
+                    Integrated AI features and chatbots.</p>
+            </div>
+
+            <div class="terminal-box experience-card">
+                <div class="exp-marker"></div>
+                <h3 class="exp-title">[02] WORDPRESS DEVELOPER</h3>
+                <p class="exp-company">> COMPANY: WEB AGENCY</p>
+                <p class="exp-period">> PERIOD: JUN 2022 - DEC 2022</p>
+                <div class="exp-skills">
+                    <p class="skill-label">> SKILLS:</p>
+                    <span class="tech-list">["WordPress", "PHP", "WooCommerce", "Elementor", "MySQL"]</span>
+                </div>
+                <p class="exp-desc">> Developed custom WordPress themes and plugins. Managed WooCommerce stores and
+                    implemented SEO optimization.</p>
+            </div>
+
+            <div class="terminal-box experience-card">
+                <div class="exp-marker"></div>
+                <h3 class="exp-title">[03] FRONTEND DEVELOPER</h3>
+                <p class="exp-company">> COMPANY: TECH STARTUP</p>
+                <p class="exp-period">> PERIOD: JAN 2021 - MAY 2022</p>
+                <div class="exp-skills">
+                    <p class="skill-label">> SKILLS:</p>
+                    <span class="tech-list">["HTML", "CSS", "JavaScript", "React", "TypeScript"]</span>
+                </div>
+                <p class="exp-desc">> Created responsive user interfaces and implemented complex frontend features.</p>
+            </div>
+
+            <div class="terminal-box">
+                <h2 class="section-title">> EDUCATION.LOG</h2>
+                <div class="section-line"></div>
+                <div class="education-item">
+                    <h3 class="edu-title">> BACHELOR'S DEGREE IN COMPUTER SCIENCE</h3>
+                    <p class="edu-info">> UNIVERSITY: LOCAL UNIVERSITY</p>
+                    <p class="edu-info">> YEAR: 2020 - 2024</p>
+                    <p class="edu-info">> STATUS: <span class="status-completed">GRADUATED</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page">
+            <div class="terminal-box">
+                <h2 class="section-title">> CONTACT.SH</h2>
+                <div class="section-line"></div>
+                <p class="contact-intro">WANT TO WORK TOGETHER OR JUST SAY HELLO? FILL OUT THE FORM BELOW OR USE THE
+                    CONTACT INFORMATION.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="terminal-box contact-form-box">
+                    <h3 class="form-title">> SEND MESSAGE</h3>
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label class="form-label">> NAME:</label>
+                            <input type="text" id="name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">> EMAIL:</label>
+                            <input type="email" id="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">> MESSAGE:</label>
+                            <textarea id="message" class="form-textarea" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">[SEND MESSAGE]</button>
+                    </form>
+                </div>
+
+                <div class="terminal-box contact-info-box">
+                    <h3 class="info-title">> CONTACT INFO</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <p class="contact-label">> EMAIL:</p>
+                            <a href="mailto:hsnmhdy1799@gmail.com" class="contact-link">hsnmhdy1799@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <p class="contact-label">> PHONE:</p>
+                            <a href="tel:+201552731939" class="contact-link">+20 155 273 1939</a>
+                        </div>
+                    </div>
+
+                    <h3 class="info-title">> SOCIAL LINKS:</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61561369170243" target="_blank"
+                            class="social-link">
+                            <span class="social-icon">📘</span> FACEBOOK
+                        </a>
+                        <a href="https://github.com/alhussein-dev" target="_blank" class="social-link">
+                            <span class="social-icon">💻</span> GITHUB
+                        </a>
+                        <a href="https://linkedin.com/in/alhussein-ismail" target="_blank" class="social-link">
+                            <span class="social-icon">💼</span> LINKEDIN
+                        </a>
+                    </div>
+
+                    <div class="availability-box">
+                        <p class="availability-label">> AVAILABILITY STATUS:</p>
+                        <p class="availability-status"><span class="status-dot"></span> OPEN FOR OPPORTUNITIES</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="terminal-footer">
+        <div class="footer-content">
+            <p class="footer-text">> © 2024 AL-HUSSEIN ISMAIL MOHAMMEDAL-MAHDY | ALL RIGHTS RESERVED</p>
+            <p class="footer-version">> VERSION 2.0.0 | LAST UPDATED: 2024</p>
+        </div>
+    </footer>
+
+    <canvas id="matrix-bg"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            initNavigation();
+            initMatrixBackground();
+            initTypingEffects();
+            initContactForm();
+        });
+
+        function initNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const pages = document.querySelectorAll('.page');
+
+            navButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetPage = this.dataset.page;
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(targetPage).classList.add('active');
+
+                    const logo = document.querySelector('.logo');
+                    if (logo) {
+                        logo.classList.add('glitch');
+                        setTimeout(() => logo.classList.remove('glitch'), 500);
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+        }
+
+        function initMatrixBackground() {
+            const canvas = document.getElementById('matrix-bg');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+            const charArray = chars.split('');
+            const fontSize = 14;
+            const columns = canvas.width / fontSize;
+
+            const drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * canvas.height / fontSize;
+            }
+
+            function draw() {
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#00ff00';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const char = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            setInterval(draw, 50);
+        }
+
+        function initTypingEffects() {
+            const nameElement = document.getElementById('name-type');
+            const roleElement = document.getElementById('role-type');
+
+            if (nameElement) typeWriter(nameElement, 'AL-HUSSEIN ISMAIL', 100);
+            if (roleElement) setTimeout(() => typeWriter(roleElement, 'FULL STACK DEVELOPER', 80), 2000);
+        }
+
+        function typeWriter(element, text, speed) {
+            element.textContent = '';
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        function initContactForm() {
+            const form = document.getElementById('contact-form');
+            if (!form) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                const submitBtn = form.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = '[SENDING...]';
+                submitBtn.disabled = true;
+
+                setTimeout(() => {
+                    const mailtoLink = `mailto:hsnmhdy1799@gmail.com?subject=Portfolio Contact from ${name}&body=${encodeURIComponent(message)}%0D%0A%0D%0AFrom: ${email}`;
+                    window.location.href = mailtoLink;
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1000);
+            });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            const pages = ['home', 'projects', 'experience', 'contact'];
+            const currentActive = document.querySelector('.nav-btn.active');
+            const currentIndex = pages.indexOf(currentActive.dataset.page);
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIndex = (currentIndex + 1) % pages.length;
+                document.querySelector(`[data-page="${pages[nextIndex]}"]`).click();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+                document.querySelector(`[data-page="${pages[prevIndex]}"]`).click();
+            }
+            if (e.key >= '1' && e.key <= '4') {
+                const index = parseInt(e.key) - 1;
+                if (pages[index]) document.querySelector(`[data-page="${pages[index]}"]`).click();
+            }
+        });
+
+        console.log('%c> TERMINAL INITIALIZED', 'color: #00ff00; font-size: 20px; font-family: monospace;');
+        console.log('%c> WELCOME TO AL-HUSSEIN\'S PORTFOLIO', 'color: #00ff00; font-size: 14px; font-family: monospace;');
+    </script>
+</body>
+
+</html>
